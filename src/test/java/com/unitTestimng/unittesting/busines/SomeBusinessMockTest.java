@@ -21,28 +21,21 @@ public class SomeBusinessMockTest {
 
     @Test
     public void calculateSumUsingDataService_basic() {
-
         when(dataServiceMock.retrieveAllData()).thenReturn(new int[]{1, 2, 3});
-        int actualResult = business.calculateSumUsingDataService();
-        int expectResult = 6;
-        assertEquals(expectResult, actualResult);
+        assertEquals(6, business.calculateSumUsingDataService());
     }
 
     @Test
     public void calculateSumUsingDataService_empty() {
 
         when(dataServiceMock.retrieveAllData()).thenReturn(new int[]{});
-        int actualResult = business.calculateSumUsingDataService();
-        int expectResult = 0;
-        assertEquals(expectResult, actualResult);
+        assertEquals(0, business.calculateSumUsingDataService());
     }
 
     @Test
     public void calculateSumUsingDataService_one() {
 
         when(dataServiceMock.retrieveAllData()).thenReturn(new int[]{1});
-        int actualResult = business.calculateSumUsingDataService();
-        int expectResult = 1;
-        assertEquals(expectResult, actualResult);
+        assertEquals(1, business.calculateSumUsingDataService());
     }
 }
