@@ -1,7 +1,10 @@
 package com.unitTestimng.unittesting.busines;
 
+import com.fasterxml.jackson.databind.node.POJONode;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
+import javax.servlet.http.PushBuilder;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -53,8 +56,17 @@ public class ListMockTest {
         verify(mock, atLeastOnce()).get(anyInt());
         verify(mock, atMost(3)).get(anyInt());
         verify(mock, never()).get(3);
-
     }
 
+    @Test
+    public void argumentCapturing() {
+        //SUT
+        mock.add("SomeString");
 
+        //Verification
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mock).add(captor.capture());
+
+        assertEquals("SomeString", captor.getValue());
+    }
 }
