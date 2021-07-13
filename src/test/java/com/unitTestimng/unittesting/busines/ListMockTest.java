@@ -2,6 +2,8 @@ package com.unitTestimng.unittesting.busines;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 public class ListMockTest {
+    private static final Logger logger = LoggerFactory.getLogger(ListMockTest.class);
     List<String> mock = mock(List.class);
 
     @Test
@@ -104,19 +107,19 @@ public class ListMockTest {
     public void spying() {
         ArrayList arrayListSpy = spy(ArrayList.class);
         arrayListSpy.add("Test0");
-        System.out.println(arrayListSpy.get(0));//Test0
-        System.out.println(arrayListSpy.size());//1
+        logger.info(String.valueOf(arrayListSpy.get(0)));//Test0
+        logger.info(String.valueOf(arrayListSpy.size()));//1
         arrayListSpy.add("Test");
         arrayListSpy.add("Test2");
-        System.out.println(arrayListSpy.size());//3
+        logger.info(String.valueOf(arrayListSpy.size()));//3
 
         when(arrayListSpy.size()).thenReturn(5);
-        System.out.println(arrayListSpy.size());//5
+        logger.info(String.valueOf(arrayListSpy.size()));//5
 
         arrayListSpy.add("Test4");
         verify(arrayListSpy).add("Test4");
 
-        System.out.println(arrayListSpy.size());//5
+        logger.info(String.valueOf(arrayListSpy.size()));//5
 
         //a spy, by default retains behavior of the original class.
         //it is possible to stub (override) and verify specific behavior (methods) on a spy!
