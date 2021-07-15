@@ -1,10 +1,9 @@
 package controller;
 
-import com.unitTestimng.unittesting.controller.HelloWorldController;
 import com.unitTestimng.unittesting.controller.ItemController;
-import com.unitTestimng.unittesting.model.Item;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -33,10 +32,14 @@ public class ItemControllerTest {
                 .get("/dummy-item")
                 .accept(MediaType.APPLICATION_JSON);
 
+        String expected="{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100}";
+
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100}"))
                 .andReturn();
+
+        JSONAssert.assertEquals("{\"id\":1,\"name\":\"Ball\",\"price\":10,\"quantity\":100}",result.getResponse().getContentAsString(),false);
 
     }
 }
